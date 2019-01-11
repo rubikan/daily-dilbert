@@ -6,6 +6,7 @@ import smtplib
 import ssl
 from bs4 import BeautifulSoup
 from datetime import date
+from discord_webhook import DiscordWebhook, DiscordEmbed
 from email import encoders
 from email.mime.base import MIMEBase
 from email.mime.multipart import MIMEMultipart
@@ -22,7 +23,7 @@ def download_comic():
     img_resp = requests.get(img_url, allow_redirects=True)
     open(filename, "wb").write(img_resp.content)
 
-def send_mails(config):
+def send_mail(config):
     host = config["HOST"]
     port = config["PORT"]
     username = config["USER"]
@@ -64,10 +65,20 @@ def send_mails(config):
             text = message.as_string()
             server.sendmail(username, rec, text)
 
+def send_discord_webhook(config):
+    webhook = DiscordWebhook(url=config["URL"], username=config["USERNAME"])
+    with open(filename, "rb") as f:
+        webhook.add_file(file=f.read(), filename="Dilbert_" + date.today().strftime('%d_%m_%Y') + ".gif") 
+    webhook.execute()       
+
 with open('config.json', 'r') as f:
     config = json.load(f)
 
 download_comic()
 if "MAIL" in config:
-    send_mails(config["MAIL"])
+    print("Sending comic via mail")
+    send_mail(config["MAIL"])
+if "DISCORD_WEBHOOK" in config:
+    print("Posting comic to discord webhook")
+    send_discord_webhook(config["DISCORD_WEBHOOK"])
 os.remove(filename)

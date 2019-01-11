@@ -8,5 +8,9 @@
             "test@test.com",
             "test2@test.com"
         ]
+    },
+    "DISCORD_WEBHOOK": {
+        "URL":"https://urlToDiscordWebhook.com",
+        "USERNAME":"Test"
     }
 }
