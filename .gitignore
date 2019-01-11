@@ -1,2 +1,5 @@
 # Prevent accidental checkin of config file
 config.json
+
+# VSCode
+.vscode/
