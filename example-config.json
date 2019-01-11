@@ -1,12 +1,12 @@
 {
-    "MAIL_SERVER": {
+    "MAIL": {
         "HOST":"mail.test.com",
         "PORT":"465",
         "USER":"Username",
-        "PASS":"Password"
-    },
-    "RECIPIENTS": [
-        "test@test.com",
-        "test2@test.com"
-    ]
+        "PASS":"Password",
+        "RECIPIENTS": [
+            "test@test.com",
+            "test2@test.com"
+        ]
+    }
 }

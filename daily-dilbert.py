@@ -23,10 +23,10 @@ def download_comic():
     open(filename, "wb").write(img_resp.content)
 
 def send_mails(config):
-    host = config["MAIL_SERVER"]["HOST"]
-    port = config["MAIL_SERVER"]["PORT"]
-    username = config["MAIL_SERVER"]["USER"]
-    password = config["MAIL_SERVER"]["PASS"]  
+    host = config["HOST"]
+    port = config["PORT"]
+    username = config["USER"]
+    password = config["PASS"]  
 
     # Create a multipart message and set headers
     message = MIMEMultipart()
@@ -68,5 +68,6 @@ with open('config.json', 'r') as f:
     config = json.load(f)
 
 download_comic()
-send_mails(config)
+if "MAIL" in config:
+    send_mails(config["MAIL"])
 os.remove(filename)
