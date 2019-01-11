@@ -1,6 +1,6 @@
 # daily-dilbert
 
-Small script to scrape the latest dilbert comic and send it via email
+Small script to scrape the latest dilbert comic and send it via email or post it to a discord webhook
 
 ## Installation
 
@@ -13,7 +13,8 @@ pipenv install
 cp example-config.json config.json
 ```
 
-In the newly copied config.json file you can configure the mailserver and a list of recipients. The script assumes SMTP-over-SSL, everything else hasn't been tested and probably won't work.
+In the newly copied config.json file you can configure the mailserver including the recipients or the discord webhook. If you only want to use one of these, just omit the other section altogether.
+The script assumes SMTP-over-SSL for mails, everything else hasn't been tested and probably won't work. Gmail is a good candidate, and was used in the testing process.
 
 Run the script via
 
