@@ -19,7 +19,7 @@ def download_comic():
     page_resp = requests.get(page_url)
     soup = BeautifulSoup(page_resp.text, "html.parser")
     image_tag = soup.find('img', {'class': 'img-comic'})     
-    img_url = "https:" + image_tag.get("src")
+    img_url = image_tag.get("src")
     img_resp = requests.get(img_url, allow_redirects=True)
     open(filename, "wb").write(img_resp.content)
 
