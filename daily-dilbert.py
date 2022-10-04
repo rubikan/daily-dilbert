@@ -66,10 +66,11 @@ def send_mail(config):
             server.sendmail(username, rec, text)
 
 def send_discord_webhook(config):
-    webhook = DiscordWebhook(url=config["URL"], username=config["USERNAME"])
-    with open(filename, "rb") as f:
-        webhook.add_file(file=f.read(), filename="Dilbert_" + date.today().strftime('%d_%m_%Y') + ".gif") 
-    webhook.execute()       
+    for webbhookConfig in config:
+        webhook = DiscordWebhook(url=webbhookConfig["URL"], username=webbhookConfig["USERNAME"])
+        with open(filename, "rb") as f:
+            webhook.add_file(file=f.read(), filename="Dilbert_" + date.today().strftime('%d_%m_%Y') + ".gif") 
+        webhook.execute()       
 
 with open('config.json', 'r') as f:
     config = json.load(f)
